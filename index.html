@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flipbook</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+
+      header {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+
+      #flipbook {
+        width: 600px;
+        height: 400px;
+        position: relative;
+      }
+
+      .book-cover,
+      .book-page {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .book-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .book-page {
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        visibility: hidden;
+      }
+
+      .book-page.active,
+      .book-cover.active {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .controls {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
+        font-size: 1.2em;
+        border-radius: 50%;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .controls:hover {
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .prev {
+        left: -60px;
+      }
+
+      .next {
+        right: -60px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>Flipbook</header>
+    <div id="flipbook">
+      <div class="book-cover active">
+        <img src="https://via.placeholder.com/600x400" alt="Book Cover" />
+      </div>
+      <div class="book-page" style="background: #ffdddd">Page 1</div>
+      <div class="book-page" style="background: #ddffdd">Page 2</div>
+      <div class="book-page" style="background: #ddddff">Page 3</div>
+      <div class="book-page" style="background: #ffffdd">Page 4</div>
+      <div class="controls prev" onclick="prevPage()">&#9664;</div>
+      <div class="controls next" onclick="nextPage()">&#9654;</div>
+    </div>
+
+    <script>
+      let currentPage = -1; // -1 represents the cover
+      const pages = document.querySelectorAll(".book-page");
+      const cover = document.querySelector(".book-cover");
+
+      cover.addEventListener("click", () => {
+        cover.classList.remove("active");
+        currentPage = 0;
+        pages[currentPage].classList.add("active");
+      });
+
+      function nextPage() {
+        if (currentPage === -1) {
+          cover.classList.remove("active");
+          currentPage = 0;
+          pages[currentPage].classList.add("active");
+        } else if (currentPage < pages.length - 1) {
+          pages[currentPage].classList.remove("active");
+          currentPage++;
+          pages[currentPage].classList.add("active");
+        } else if (currentPage === pages.length - 1) {
+          pages[currentPage].classList.remove("active");
+          cover.classList.add("active");
+          currentPage = -1;
+        }
+      }
+
+      function prevPage() {
+        if (currentPage > 0) {
+          pages[currentPage].classList.remove("active");
+          currentPage--;
+          pages[currentPage].classList.add("active");
+        } else if (currentPage === 0) {
+          pages[currentPage].classList.remove("active");
+          cover.classList.add("active");
+          currentPage = -1;
+        }
+      }
+    </script>
+  </body>
+</html>
