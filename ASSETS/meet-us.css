@@ -1,0 +1,84 @@
+:root {
+  --background-color: #000000;
+  --text-color: rgb(9, 255, 0);
+  --text-color-hover: rgb(11, 232, 3);
+  --column-background: #252424;
+  --column-text-color: rgb(9, 255, 0);
+  --column-subtext-color: #e6e6e6;
+  --bio-text-color: #c5c5c5;
+  --box-shadow: 0 0 20px rgba(9, 255, 0, 0.5);
+}
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+}
+
+/* Back Button */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 18px;
+}
+
+.back-button:hover {
+  color: var(--text-color-hover);
+}
+
+/* Contributors Container */
+.contributors-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Contributor Column */
+.contributor-column {
+  flex: 1;
+  margin: 0 15px;
+  text-align: center;
+  background-color: var(--column-background);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+.contributor-column img {
+  width: 320px;
+  height: 320px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.contributor-column h2 {
+  margin: 10px 0;
+  font-size: 24px;
+  color: var(--column-text-color);
+}
+
+.contributor-column .job-title {
+  color: var(--column-subtext-color);
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.contributor-column .pronouns {
+  color: var(--column-subtext-color);
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.contributor-column .bio {
+  color: var(--bio-text-color);
+  font-size: 14px;
+  line-height: 1.5;
+}
