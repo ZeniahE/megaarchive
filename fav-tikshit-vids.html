@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TikTok-like Video Feed</title>
+    <style>
+      /* styles.css */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+        color: #fff;
+      }
+
+      .container {
+        display: flex;
+        width: 100%;
+        max-height: 520px;
+        /* background-color: #111; */
+        justify-content: center;
+        align-items: center;
+      }
+
+      .video-container {
+        position: relative;
+        width: 340px;
+        height: 520px;
+        box-shadow: 0 0 10px rgba(9, 255, 0, 0.5);
+        margin: 10px;
+        border-radius: 5px;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      .video-controls {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .next-video-btn {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+
+      .comment-section {
+        width: 30%;
+        padding: 20px;
+        background-color: #222;
+        overflow-y: auto;
+        box-shadow: 0 0 10px rgba(9, 255, 0, 0.5);
+        margin: 10px;
+      }
+
+      .comments-list {
+        margin-bottom: 20px;
+      }
+
+      .comment {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+      }
+
+      .comment img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .comment-content {
+        flex: 1;
+      }
+
+      .comment-content .username {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .comment-content .text {
+        font-size: 14px;
+        color: #ddd;
+      }
+
+      textarea {
+        width: 100%;
+        height: 60px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #333;
+        border: none;
+        color: #fff;
+        resize: none;
+      }
+
+      button {
+        background-color: #555;
+        border: none;
+        color: #fff;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left side: Video and buttons -->
+      <div class="video-container">
+        <video
+          id="videoPlayer"
+          src="tiktoks/2019-11-18_Zazi-1.mp4"
+          autoplay
+        ></video>
+        <div class="video-controls">
+          <button id="playPause">Play</button>
+        </div>
+        <button id="nextVideoBtn" class="next-video-btn">↓</button>
+      </div>
+
+      <!-- Right side: Comment section -->
+      <div class="comment-section">
+        <h3>Comments</h3>
+        <div id="commentsList" class="comments-list">
+          <!-- Pre-existing comments will be dynamically added here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // script.js
+      const videoPlayer = document.getElementById("videoPlayer");
+      const nextVideoBtn = document.getElementById("nextVideoBtn");
+      const commentsList = document.getElementById("commentsList");
+      const playPauseBtn = document.getElementById("playPause");
+
+      // Sample video list
+      const videos = [
+        "tiktoks/2019-11-18_Zazi-1.mp4",
+        "tiktoks/2019-09-25-Zazi-2.mp4",
+        "tiktoks/2021-12-10_Brian-1.mp4",
+      ];
+
+      // Sample comments data
+      const comments = [
+        {
+          profilePic: "pfps/ice.jpg",
+          username: "ice.the.artist",
+          text: "This is a great video!",
+        },
+        {
+          profilePic: "pfps/mypfp1.webp",
+          username: "nerdyzazi",
+          text: "Love the content!",
+        },
+        {
+          profilePic: "pfps/brian.webp",
+          username: "thelilgit",
+          text: "Awesome work!",
+        },
+      ];
+
+      let currentVideoIndex = 0;
+
+      // Load the first video
+      videoPlayer.src = videos[currentVideoIndex];
+
+      // Function to load the next video
+      function loadNextVideo() {
+        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+        videoPlayer.src = videos[currentVideoIndex];
+        videoPlayer.play();
+        renderComments(); // Render comments for the new video
+      }
+
+      // Function to render comments
+      function renderComments() {
+        commentsList.innerHTML = ""; // Clear existing comments
+        comments.forEach((comment) => {
+          const commentElement = document.createElement("div");
+          commentElement.className = "comment";
+
+          // Add profile picture
+          const profilePic = document.createElement("img");
+          profilePic.src = comment.profilePic;
+          profilePic.alt = comment.username;
+          commentElement.appendChild(profilePic);
+
+          // Add comment content
+          const commentContent = document.createElement("div");
+          commentContent.className = "comment-content";
+
+          const username = document.createElement("div");
+          username.className = "username";
+          username.textContent = comment.username;
+          commentContent.appendChild(username);
+
+          const text = document.createElement("div");
+          text.className = "text";
+          text.textContent = comment.text;
+          commentContent.appendChild(text);
+
+          commentElement.appendChild(commentContent);
+          commentsList.appendChild(commentElement);
+        });
+      }
+
+      // Event listener for the next video button
+      nextVideoBtn.addEventListener("click", loadNextVideo);
+
+      // Optional: Add keyboard support for next video
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") {
+          loadNextVideo();
+        }
+      });
+
+      // Function to toggle play/pause
+      function togglePlayPause() {
+        if (videoPlayer.paused) {
+          videoPlayer.play();
+          playPauseBtn.textContent = "Pause";
+        } else {
+          videoPlayer.pause();
+          playPauseBtn.textContent = "Play";
+        }
+      }
+
+      // Event listener for the play/pause button
+      playPauseBtn.addEventListener("click", togglePlayPause);
+
+      // Event listener for the next video button
+      nextVideoBtn.addEventListener("click", loadNextVideo);
+
+      // Optional: Add keyboard support for next video
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") {
+          loadNextVideo();
+        }
+      });
+
+      // Render comments on page load
+      renderComments();
+    </script>
+  </body>
+</html>
