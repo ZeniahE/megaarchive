@@ -50,6 +50,19 @@
         gap: 10px;
       }
 
+      .prev-video-btn {
+        position: absolute;
+        bottom: 60px; /* Position it above the down arrow */
+        right: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+
       .next-video-btn {
         position: absolute;
         bottom: 20px;
@@ -133,12 +146,12 @@
       <div class="video-container">
         <video
           id="videoPlayer"
-          src="tiktoks/2019-11-18_Zazi-1.mp4"
-          autoplay
+          src="tiktoks/Brian/2020-05-16-brian-11.mp4"
         ></video>
         <div class="video-controls">
           <button id="playPause">Play</button>
         </div>
+        <button id="prevVideoBtn" class="prev-video-btn">↑</button>
         <button id="nextVideoBtn" class="next-video-btn">↓</button>
       </div>
 
@@ -152,36 +165,194 @@
     </div>
 
     <script>
-      // script.js
       const videoPlayer = document.getElementById("videoPlayer");
       const nextVideoBtn = document.getElementById("nextVideoBtn");
+      const prevVideoBtn = document.getElementById("prevVideoBtn");
       const commentsList = document.getElementById("commentsList");
       const playPauseBtn = document.getElementById("playPause");
 
-      // Sample video list
+      // Video list
       const videos = [
-        "tiktoks/2019-11-18_Zazi-1.mp4",
-        "tiktoks/2019-09-25-Zazi-2.mp4",
-        "tiktoks/2021-12-10_Brian-1.mp4",
+        // Brian's videos
+        "tiktoks/Brian/2019-10-28-brian-1.mp4",
+        "tiktoks/Brian/2020-11-01-brian-2.mp4",
+        "tiktoks/Brian/2019-10-23-brian-3.mp4",
+
+        // Ice's videos
+        "tiktoks/Ice/2023-06-18-Ice-1.mp4",
+        "tiktoks/Ice/2024-02-20-Ice-2.mp4",
+        "tiktoks/Ice/2024-03-03-Ice-3.mp4",
+
+        // Zazi's videos
+        "tiktoks/Zazi/2019-11-18-Zazi-1.mp4",
+        "tiktoks/Zazi/2019-09-25-Zazi-2.mp4",
+        "tiktoks/Zazi/2019-09-09-Zazi-3.mp4",
       ];
 
-      // Sample comments data
+      // Sample comments data for each video
       const comments = [
-        {
-          profilePic: "pfps/ice.jpg",
-          username: "ice.the.artist",
-          text: "This is a great video!",
-        },
-        {
-          profilePic: "pfps/mypfp1.webp",
-          username: "nerdyzazi",
-          text: "Love the content!",
-        },
-        {
-          profilePic: "pfps/brian.webp",
-          username: "thelilgit",
-          text: "Awesome work!",
-        },
+        // Comments for brian 1
+        [
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "WHAT IS THAT HANGER??????",
+          },
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "what was the thought process in making this…",
+          },
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "okay!!",
+          },
+        ],
+        // Comments for brian 2
+        [
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "i know what you are… (real)",
+          },
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "this is zazi core",
+          },
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "shuttup ice",
+          },
+        ],
+        // Comments for brian 3
+        [
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "we love mr wingwingwingwing",
+          },
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "this is something my best friend would’ve pulled-",
+          },
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "he looked so disappointed LMAO",
+          },
+        ],
+        // Comments for ice 1
+        [
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "this made me tehe. This is also me when i spend art supplies",
+          },
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "miami show when?",
+          },
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "lets fund this portland show next!",
+          },
+        ],
+        // Comments for ice 2
+        [
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "im telling y’all its real! I SEEN IT WITH MY OWN 2 EYES",
+          },
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "i love watching my hats get made on stream! (5th hat purchase had to be postponed by orders from the jit)",
+          },
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "i need a hat (then stop flopping and buy one jit, we know you and ur $5K vinyl collection can afford it -Zazi)",
+          },
+        ],
+        // Comments for Ice 3
+        [
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "this made me laugh so hard i cried",
+          },
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "i need the ny show to sell out like this",
+          },
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "the people need to do this with the tour next so you can come to portland!",
+          },
+        ],
+        // Comments for Zazi 1
+        [
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "haha, four eyessssss",
+          },
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "wait, MEGA IS BLIND???",
+          },
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "so where are your glasses now???",
+          },
+        ],
+        // Comments for Zazi 2
+        [
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "serving 2019 realness !!",
+          },
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "watching this makes me feel old",
+          },
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "this SCREAMS 2019 but i love it",
+          },
+        ],
+        // Comments for Zazi 3
+        [
+          {
+            profilePic: "pfps/mypfp1.webp",
+            username: "nerdyzazi",
+            text: "#fullversionNEOWWW !!",
+          },
+          {
+            profilePic: "pfps/ice.jpg",
+            username: "ice.the.artist",
+            text: "If this was a song, imma need to pray for your lungs.",
+          },
+          {
+            profilePic: "pfps/brian.webp",
+            username: "theliljit",
+            text: "drop it on spotify now or else.",
+          },
+        ],
       ];
 
       let currentVideoIndex = 0;
@@ -191,7 +362,19 @@
 
       // Function to load the next video
       function loadNextVideo() {
-        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+        if (currentVideoIndex == videos.length - 1) {
+          currentVideoIndex = -1;
+        }
+        currentVideoIndex = currentVideoIndex + 1;
+        videoPlayer.src = videos[currentVideoIndex];
+        videoPlayer.play();
+        renderComments(); // Render comments for the new video
+      }
+
+      // Function to load the previous video
+      function loadPrevVideo() {
+        currentVideoIndex =
+          (currentVideoIndex - 1 + videos.length) % videos.length;
         videoPlayer.src = videos[currentVideoIndex];
         videoPlayer.play();
         renderComments(); // Render comments for the new video
@@ -200,7 +383,9 @@
       // Function to render comments
       function renderComments() {
         commentsList.innerHTML = ""; // Clear existing comments
-        comments.forEach((comment) => {
+        const currentComments = comments[currentVideoIndex]; // Get comments for the current video
+
+        currentComments.forEach((comment) => {
           const commentElement = document.createElement("div");
           commentElement.className = "comment";
 
@@ -229,16 +414,6 @@
         });
       }
 
-      // Event listener for the next video button
-      nextVideoBtn.addEventListener("click", loadNextVideo);
-
-      // Optional: Add keyboard support for next video
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowDown") {
-          loadNextVideo();
-        }
-      });
-
       // Function to toggle play/pause
       function togglePlayPause() {
         if (videoPlayer.paused) {
@@ -255,6 +430,9 @@
 
       // Event listener for the next video button
       nextVideoBtn.addEventListener("click", loadNextVideo);
+
+      // Event listener for the previous video button
+      prevVideoBtn.addEventListener("click", loadPrevVideo);
 
       // Optional: Add keyboard support for next video
       document.addEventListener("keydown", (event) => {
