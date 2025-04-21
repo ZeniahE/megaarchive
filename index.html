@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Are You A Robot?</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -89,6 +90,9 @@
           >
             No, I am not a Robot.
           </button>
+          <button id="thirdOption" class="vt323-regular">
+            I am secretly a Robot.
+          </button>
         </div>
       </div>
     </div>
@@ -97,6 +101,7 @@
       const itwo = document.getElementById("itwo");
       const yes = document.getElementById("yes");
       const no = document.getElementById("no");
+      const three = document.getElementById("thirdOption");
 
       yes.addEventListener("click", function () {
         ione.style.display = "none";
@@ -104,7 +109,20 @@
         alertbox.render({
           alertIcon: "error",
           title: "ACCESS DENIED",
-          message: "ERROR: 403 FORBIDDEN",
+          message:
+            "ERROR: 403 FORBIDDEN: LIKES AND COMMENTS ORIGINATOR  BOT DETECTED",
+          btnTitle: "OK",
+          themeColor: "#ff0000",
+          btnColor: "#ff0000",
+          border: true,
+        });
+      });
+      three.addEventListener("click", function () {
+        alertbox.render({
+          alertIcon: "error",
+          title: "Be so fr rn.",
+          message:
+            "Ho you are not no damn likes and comments ahh robot click the damn no button !! (said sweetly and with kindness)",
           btnTitle: "OK",
           themeColor: "#ff0000",
           btnColor: "#ff0000",
