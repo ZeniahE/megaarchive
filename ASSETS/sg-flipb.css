@@ -20,6 +20,7 @@ body {
       transparent 0 100px,
       #25283b22 100px 101px
     );
+  color: red;
 }
 
 :root {
@@ -52,6 +53,32 @@ p {
   font-size: 2em;
   color: var(--green);
 }
+
+.content-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.carousel {
+  flex: 1;
+}
+.text-container {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  display: none; /* Hide by default */
+  font-size: 1.2em;
+  max-width: 500px;
+}
+.text-container.visible {
+  display: block; /* Show when active */
+}
+#dynamicText {
+  font-size: 1.5em;
+  max-width: 500px;
+}
+
 .carousel,
 .slide,
 .carousel-item {
