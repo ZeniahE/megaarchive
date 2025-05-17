@@ -1,0 +1,18 @@
+:root {
+  --text-color: rgb(9, 255, 0);
+  --text-color-hover: rgb(11, 232, 3);
+}
+
+/* Back Button */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 18px;
+}
+
+.back-button:hover {
+  color: var(--text-color-hover);
+}
