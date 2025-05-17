@@ -2,61 +2,112 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book</title>
-    <link rel="stylesheet" href="ASSETS/years.css" />
+    <title>Image Book Reader (Iframe Version)</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .book-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 600px;
+        max-height: 90%;
+        padding: 1rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        background: white;
+        border-radius: 8px;
+        margin-top: 10px;
+        width: 100%;
+        height: 100%;
+      }
+
+      .iframe-viewer {
+        width: 100%;
+        max-width: 600px;
+        height: 80vh;
+        border: none;
+        border-radius: 4px;
+      }
+
+      .controls {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 600px;
+      }
+
+      .controls button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .controls button:disabled {
+        background-color: #cccccc;
+      }
+    </style>
   </head>
   <body>
-    <!-- Previous Button -->
-    <button id="prev-btn"></button>
-
-    <!-- Book -->
-    <div id="book" class="book">
-      <!-- Paper 1 -->
-      <div id="p1" class="paper">
-        <div class="front">
-          <div id="f1" class="front-content">
-            <h1>Front 1</h1>
-          </div>
-        </div>
-        <div class="back">
-          <div id="b1" class="back-content">
-            <h1>Back 1</h1>
-          </div>
-        </div>
-      </div>
-      <!-- Paper 2 -->
-      <div id="p2" class="paper">
-        <div class="front">
-          <div id="f2" class="front-content">
-            <h1>Front 2</h1>
-          </div>
-        </div>
-        <div class="back">
-          <div id="b2" class="back-content">
-            <h1>Back 2</h1>
-          </div>
-        </div>
-      </div>
-      <!-- Paper 3 -->
-      <div id="p3" class="paper">
-        <div class="front">
-          <div id="f3" class="front-content">
-            <h1>Front 3</h1>
-          </div>
-        </div>
-        <div class="back">
-          <div id="b3" class="back-content">
-            <h1>Back 3</h1>
-          </div>
-        </div>
+    <div class="book-container">
+      <iframe id="bookIframe" class="iframe-viewer" allowfullscreen></iframe>
+      <div class="controls">
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
       </div>
     </div>
 
-    <!-- Next Button -->
-    <button id="next-btn"></button>
+    <script>
+      // Google Drive preview links (make sure files are set to "Anyone with the link")
+      const iframeLinks = [
+        "https://drive.google.com/file/d/1twQ7ir43KpTjJCZq6BtFNa6mtzzOMKH9/preview",
+        "https://drive.google.com/file/d/1_sGwInGBYtlvnFbQCAovrw-dKU2Fzda7/preview",
+        "https://drive.google.com/file/d/1aXyZc8eEQEXAMPLEID3/preview",
+        // Add more as needed
+      ];
 
-    <script src="ASSETS/year.js"></script>
+      let currentIndex = 0;
+
+      const bookIframe = document.getElementById("bookIframe");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      function updateIframe() {
+        bookIframe.src = iframeLinks[currentIndex];
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === iframeLinks.length - 1;
+      }
+
+      prevBtn.addEventListener("click", () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateIframe();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentIndex < iframeLinks.length - 1) {
+          currentIndex++;
+          updateIframe();
+        }
+      });
+
+      // Initial load
+      updateIframe();
+    </script>
   </body>
 </html>
