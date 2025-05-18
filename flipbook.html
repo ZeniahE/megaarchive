@@ -210,7 +210,7 @@
             <a
               class="dropdown-item"
               data-bs-target="#mainFlipbook"
-              data-bs-slide-to="11"
+              data-bs-slide-to="112"
               >Zazi's fav #1</a
             >
           </li>
@@ -218,7 +218,7 @@
             <a
               class="dropdown-item"
               data-bs-target="#mainFlipbook"
-              data-bs-slide-to="21"
+              data-bs-slide-to="30"
               >Zazi's fav #2</a
             >
           </li>
@@ -226,7 +226,7 @@
             <a
               class="dropdown-item"
               data-bs-target="#mainFlipbook"
-              data-bs-slide-to="37"
+              data-bs-slide-to="127"
               >Zazi's fav #3</a
             >
           </li>
@@ -1432,10 +1432,9 @@
       carousel.addEventListener("slide.bs.carousel", (event) => {
         const activeIndex = event.to; // Get the index of the active slide
         if (
-          // activeIndex === 11 ||
-          // activeIndex === 21 ||
-          // activeIndex === 37 ||
-
+          activeIndex === 112 ||
+          activeIndex === 30 ||
+          activeIndex === 127 ||
           // Brian
           activeIndex === 14 ||
           activeIndex === 126 ||
@@ -1451,16 +1450,17 @@
           // Show the text container and update the text
           textContainer.classList.add("visible");
           switch (activeIndex) {
-            case 11:
+            case 112:
               dynamicText.textContent =
                 "Serving face card fr, stepping on bitches necks, serving cunt, and eating down boots DON'T HURT 'EM TOO MUCH NOW !! -Zazi";
               break;
-            case 21:
-              dynamicText.textContent = "DAAAAAAAAAAAAAAAAAAAMN. -Zazi";
-              break;
-            case 37:
+            case 30:
               dynamicText.textContent =
-                "Idk man just literally EVERYTHING about this is so perfect fr. This pic has been my fav for a while and this is the perfect excuse to js get that off my chest fr LMAO -Zazi";
+                "This one is just so iconic, I genuinely cannot even find the words to descibe how much I love this image. -Zazi";
+              break;
+            case 127:
+              dynamicText.textContent =
+                "Idk man just literally EVERYTHING about this is so perfect fr, the fit, the pose with the waving the finger, the facial expression, the everything. This pic has been my fav for a while. -Zazi";
               break;
 
             // Ice
